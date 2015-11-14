@@ -80,12 +80,16 @@ function Get-RecordType ($currentRecord) {
 }
 
 # Entry point:
-function Show-BTRFileContent ($filePath) {
+function Show-BTRFileContent ($fileType, $filePath) {
     Clear-Host
     Write-Host "$separatorLine"
-    Get-BTRModel $filePath | foreach { Process-BTRRecord $_ }
-    Write-Host "$separatorLine"
-
+    if ($fileType -eq "BTR") {
+        Get-BTRModel $filePath | foreach { Process-BTRRecord $_ }
+        Write-Host "$separatorLine"
+        return
+    }
+    Write-Host "File type [$fileType] not recognised. Exiting..."
+    return
 }
 
-Show-BTRFileContent -filepath "C:\sandbox\GitRepos\BTRTaser\TestData\BTR001.TXT" 
+Show-BTRFileContent -fileType "BTR" -filePath "C:\sandbox\GitRepos\BTRTaser\TestData\BTR001.TXT" 

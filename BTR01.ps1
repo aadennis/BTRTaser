@@ -9,7 +9,8 @@ show-BTRFi1eContent -filepath "C:\sandbox\GitRepos\BTRTaser\TestData\BTR001.TXT"
 # constants: 
 $separatorLine = "---------------------------------------------------------------------------------------"
 
-$RAS = "SAR"
+$RAS = "RAS"
+$BTR = "BTR"
 
 function Show-ComplianceRecord ($currentRecord, $startPos, $columnLength, $displayName) {
     $len = $currentRecord.length
@@ -22,7 +23,7 @@ function Show-ComplianceRecord ($currentRecord, $startPos, $columnLength, $displ
 }
 
 function Get-ComplianceRecordDefinition($recordType, $fileType) {
-    if ($fileType -eq "BTR") {
+    if ($fileType -eq $BTR) {
         if ($recordType -eq "3A") {
             $recordDef = 
                 {0,2,"Record Type"},
@@ -124,7 +125,7 @@ function Get-RecordType ($currentRecord) {
 function Show-ComplianceFileContent ($fileType, $filePath) {
     Clear-Host
     Write-Host "$separatorLine"
-    $validFileTypes = "BTR",$RAS
+    $validFileTypes = $BTR,$RAS
     if ($validFileTypes -notcontains $fileType ) {
        Write-Host "File type [$fileType] not recognised. Exiting..."
        return
@@ -134,4 +135,6 @@ function Show-ComplianceFileContent ($fileType, $filePath) {
     return
 }
 
-Show-ComplianceFileContent -fileType "SAR" -filePath "C:\sandbox\GitRepos\BTRTaser\TestData\RAS001.TXT" 
+Show-ComplianceFileContent -fileType "RAS" -filePath "C:\sandbox\GitRepos\BTRTaser\TestData\RAS001.TXT" 
+#Show-ComplianceFileContent -fileType "BTR" -filePath "C:\sandbox\GitRepos\BTRTaser\TestData\BTR001.TXT" 
+

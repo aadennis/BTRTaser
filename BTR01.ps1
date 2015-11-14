@@ -4,7 +4,7 @@
 .Description 
 Display the content of all 4B and 4C BTR records found in the file, based on the specification referenced elsewhere on the blog 
 . Example 
-show-BTRFi1eContent -filepath "c:\Btr\File001.txt" 
+show-BTRFi1eContent -filepath "C:\sandbox\GitRepos\BTRTaser\TestData\BTR001.TXT" 
 #>
 # constants: 
 $separatorLine = "---------------------------------------------------------------------------------------"
@@ -36,7 +36,7 @@ function process-BTRRecord ($currentRecord) {
         return 
     }
         if ($recordType -eq "4B") {
-        show-BTRRecord $currentRecord 0 2 "Record Type"
+        show-BTRRecord $currentRecord 0 2 "Record Type"     
         Show-BTRRecord $currentRecord 2 5 "Transaction sequence Number"
         Show-BTRRecord $currentRecord 7 40 "Item 21a"
         show-BTRRecord $currentRecord 47 993 "Filler: [(assumed empty)]" $true
@@ -74,4 +74,4 @@ function Show-BTRFileContent ($filePath) {
 
 }
 
-Show-BTRFileContent -filePath "c:\temp\BTR001.txt" 
+Show-BTRFileContent -filepath "C:\sandbox\GitRepos\BTRTaser\TestData\BTR001.TXT" 

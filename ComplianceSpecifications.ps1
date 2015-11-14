@@ -85,6 +85,26 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
                 {471,10,"User Field"}
             return $recordDef
         }
+        if ($recordType -eq "2B") {
+            $recordDef = 
+                {1,2,"Record Type"},
+                {3,7,"Transaction Location Code"},
+                {8,1,"Multiple Transaction Locations (Item 22)"},
+                {9,1,"Type of Business Location (Item 23)"},
+                {10,55,"Transaction Location Legal Name (Item 24)"},
+                {65,55,"Doing Business As Name (Item 25)"},
+                {120,50,"Transaction Location Permanent Address (Item 26)"},
+                {170,25,"Transaction Location City (Item 27)"},
+                {195,2,"Transaction Location State (Item 28) "},
+                {197,9,"Transaction Location ZIP Code (Item 29)"},
+                {206,2,"Transaction Location Country (Item 32)"},
+                {208,9,"Transaction Location EIN or SSN/ITIN (Individual) (Item 30)"},
+                {217,10,"Transaction Location Business Phone Number (Item 31)"},
+                {227,22,"Internal File/Report Number"},
+                {249,222,"Filler"},
+                {471,10,"User Field"}
+            return $recordDef
+        }
         Write-Host "Details for Record type [$recordType] not currently available" -ForegroundColor Yellow
     }
 

@@ -22,9 +22,11 @@ function Get-RecordDefinition($recordType) {
             {7,1,"Type of Filing"},
             {8,14,"Document Control Number or BSA Identifier"},
             {22,8,"Date of Transaction"},
-            {30, 5,"Transaction Type"},
-            {35, 15,"Total Cash-in"},
-            {250, 15,"Total Cash-out"}
+            {30,5,"Transaction Type"},
+            {35,15,"Total Cash-in (Item 25)"},
+            {50,15,"Cash-in: Deposit(s) (Item 25a)"},
+            {65,15,"Cash-in: Payment(s)(Item 25b)"},
+            {250,15,"Total Cash-out"}
         return $recordDef
 
     }
@@ -45,6 +47,7 @@ function Get-RecordDefinition($recordType) {
             {7,40,"Item 22a"},
             {47,993,"Filler"},
             {1040,10,"User Field"}
+
         return $recordDef
     }
     Write-Host "Details for Record type [$recordType] not currently available" -ForegroundColor Yellow

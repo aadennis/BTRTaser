@@ -73,7 +73,16 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
                 {3,1,"Reporting Business same..."},
                 {4,55,"Reporting Business Name"},
                 {59,55,"Reporting Business Doing Business As Name"},
-                {114,50,"Reporting Business Address"}
+                {114,50,"Reporting Business Address"},
+                {164,25,"Reporting Business City"},
+                {189,2,"Reporting Business State"},
+                {191,9,"Reporting Business ZIP Code (Item 40)"},
+                {200,2,"Reporting Business Country (Item 43) "},
+                {202,9,"Reporting Business EIN or SSN/ITIN (Individual)"},
+                {211,10,"Reporting Business Phone number (Item 42)"},
+                {221,22,"Internal File/Report Number (Item 44)"},
+                {243,228,"Filler"},
+                {471,10,"User Field"}
             return $recordDef
         }
         Write-Host "Details for Record type [$recordType] not currently available" -ForegroundColor Yellow

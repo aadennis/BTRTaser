@@ -4,7 +4,8 @@
 .Description 
 Display the content of all 4B and 4C BTR records found in the file, based on the specification referenced elsewhere on the blog 
 . Example 
-show-BTRFi1eContent -filepath "C:\sandbox\GitRepos\BTRTaser\TestData\BTR001.TXT" 
+(cd C:\sandbox\GitRepos\BTRTaser)
+Show-ComplianceFileContent -fileType "RAS" -filePath .\TestData\RAS001.TXT
 #>
 # constants: 
 $separatorLine = "---------------------------------------------------------------------------------------"
@@ -18,8 +19,8 @@ function Show-ComplianceRecord ($currentRecord, $startPos, $columnLength, $displ
     $len = $currentRecord.length
     if ($len -lt ([int] $startPos + $columnLength)) {
         Write-Host "The current record only contains [$len] characters, but you have asked for a column [$displayName] at position [$startPos, $columnLength]. Exiting..."
-        $msg = Read-Host "Press a key to exit"
-        exit
+        $msg = Read-Host "Press a key to exit the program"
+        break
     }
     $columnValue = $currentRecord.substring($startpos, $columnLength) 
     Write-Host "$DisplayName [$columnLength]: [" -Foregroundcolor White -NoNewline; write-Host "$columnValue" -ForegroundColor Cyan -NoNewLine; write-Host "]" -ForegroundColor White 

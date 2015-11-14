@@ -35,7 +35,7 @@ function process-BTRRecord ($currentRecord) {
         show-BTRRecord $currentRecord 250 15 "Total Cash-out" 
         return 
     }
-        if ($recordType -eq "4B") {
+    if ($recordType -eq "4B") {
         show-BTRRecord $currentRecord 0 2 "Record Type"     
         Show-BTRRecord $currentRecord 2 5 "Transaction sequence Number"
         Show-BTRRecord $currentRecord 7 40 "Item 21a"
@@ -43,7 +43,7 @@ function process-BTRRecord ($currentRecord) {
         Show-BTRRecord $currentRecord 1040 10 "User Field"
         return 
     }
-        if ($recordType -eq "4C") {
+    if ($recordType -eq "4C") {
         show-BTRRecord $currentRecord 0 2 "Record Type"
         Show-BTRRecord $currentRecord 2 5 "Transaction sequence Number"
         Show-BTRRecord $currentRecord 7 40 "Item 22a"

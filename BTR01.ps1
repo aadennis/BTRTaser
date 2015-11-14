@@ -9,50 +9,61 @@ show-BTRFi1eContent -filepath "C:\sandbox\GitRepos\BTRTaser\TestData\BTR001.TXT"
 # constants: 
 $separatorLine = "---------------------------------------------------------------------------------------"
 
-function Show-BTRRecord ($currentRecord, $startPos, $endPos, $displayName, $ignoreData=$fa1se) {
-    if ($iqnoreData) {
-        Write-Host "$displayName" 
-        return
-    }
+function Show-BTRRecord ($currentRecord, $startPos, $endPos, $displayName) {
     $columnValue = $currentRecord.substring($startpos, $endpos) 
     Write-Host "$DisplayName : [" -Foregroundcolor White -NoNewline; write-Host "$columnValue" -ForegroundColor Cyan -NoNewLine; write-Host "]" -ForegroundColor White 
 }
 
-function process-BTRRecord ($currentRecord) {
+function Get-RecordDefinition($recordType) {
+    if ($recordType -eq "3A") {
+        $recordDef = 
+            {0,2,"Record Type"},
+            {2,5,"Transaction sequence Number"},
+            {7,1,"Type of Filing"},
+            {8,14,"Document Control Number or BSA Identifier"},
+            {22,8,"Date of Transaction"},
+            {30, 5,"Transaction Type"},
+            {35, 15,"Total Cash-in"},
+            {250, 15,"Total Cash-out"}
+        return $recordDef
+
+    }
+    if ($recordType -eq "4B") {
+        $recordDef = 
+            {0,2,"Record Type"},
+            {2,5,"Transaction sequence Number"},
+            {7,40,"Item 21a"},
+            {47,993,"Filler"},
+            {1040,10,"User Field"}
+        return $recordDef
+
+    }
+    if ($recordType -eq "4C") {
+        $recordDef = 
+            {0,2,"Record Type"},
+            {2,5,"Transaction sequence Number"},
+            {7,40,"Item 22a"},
+            {47,993,"Filler"},
+            {1040,10,"User Field"}
+        return $recordDef
+    }
+    Write-Host "Details for Record type [$recordType] not currently available" -ForegroundColor Yellow
+}
+
+function Process-BTRRecord ($currentRecord) {
 
     $recordType = Get-RecordType $currentRecord
     Write-Host "$separatorLine"
-    Write-Host $currentRecord
 
-    if ($recordType -eq "3A") {
-        show-BTRRecord $currentRecord 0 2 "Record Type"
-        Show-BTRRecord $currentRecord 2 5 "Transaction sequence Number" 
-        show-BTRRecord $currentRecord 7 1 "Type of Filing"
-        Show-BTRRecord $currentRecord 8 14 "Document Control Number or BSA Identifier" 
-        show-BTRRecord $currentRecord 22 8 "Date of Transaction" 
-        show-BTRRecord $currentRecord 30 5 "Transaction Type"
-        show-BTRRecord $currentRecord 35 15 "Total Cash-in"
-        show-BTRRecord $currentRecord 250 15 "Total Cash-out" 
-        return 
-    }
-    if ($recordType -eq "4B") {
-        show-BTRRecord $currentRecord 0 2 "Record Type"     
-        Show-BTRRecord $currentRecord 2 5 "Transaction sequence Number"
-        Show-BTRRecord $currentRecord 7 40 "Item 21a"
-        show-BTRRecord $currentRecord 47 993 "Filler: [(assumed empty)]" $true
-        Show-BTRRecord $currentRecord 1040 10 "User Field"
-        return 
-    }
-    if ($recordType -eq "4C") {
-        show-BTRRecord $currentRecord 0 2 "Record Type"
-        Show-BTRRecord $currentRecord 2 5 "Transaction sequence Number"
-        Show-BTRRecord $currentRecord 7 40 "Item 22a"
-        show-BTRRecord $currentRecord 47 993 "Filler: [(assumed empty)]" $true
-        Show-BTRRecord $currentRecord 1040 10 "User Field"
-        return 
-    }
-    Write-Host "Details for Record type [$recordType] not currently available" -ForegroundColor Yellow
+    Get-RecordDefinition($recordType) | % {
+        $columnDefinition = $_ -split ","
 
+        $offset = $columnDefinition[0]
+        $columnLength = $columnDefinition[1] 
+        $columnName = $columnDefinition[2] -replace "`"" 
+
+        show-BTRRecord $currentRecord $offset $columnLength $columnName
+    }
 }
 
 function Get-BTRModel ($filePath) {
@@ -69,7 +80,7 @@ function Get-RecordType ($currentRecord) {
 function Show-BTRFileContent ($filePath) {
     Clear-Host
     Write-Host "$separatorLine"
-    Get-BTRModel $filePath | % { process-BTRRecord $_ }
+    Get-BTRModel $filePath | foreach { Process-BTRRecord $_ }
     Write-Host "$separatorLine"
 
 }

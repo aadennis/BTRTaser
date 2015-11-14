@@ -80,10 +80,10 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
                 {471,10,"User Field"}
             return $recordDef
         }
-        if ($recordType -eq "4B") {
+        if ($recordType -eq "2A") {
             $recordDef = 
                 {1,2,"Record Type"},
-                {3,5,"Transaction sequence Number"},
+                {3,1,"Transaction sequence Number"},
                 {8,40,"Item 21a"},
                 {48,993,"Filler"},
                 {1041,10,"User Field"}
@@ -92,10 +92,10 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
         if ($recordType -eq "4C") {
             $recordDef = 
                 {1,2,"Record Type"},
-                {3,5,"Transaction sequence Number"},
-                {8,40,"Item 22a"},
-                {48,993,"Filler"},
-                {1041,10,"User Field"}
+                {3,1,"Reporting Business same..."},
+                {4,55,"Reporting Business Name"},
+                {59,55,"Reporting Business Doing Business As Name"},
+                {114,50,"Reporting Business Address"}
             return $recordDef
         }
         Write-Host "Details for Record type [$recordType] not currently available" -ForegroundColor Yellow

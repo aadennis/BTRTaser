@@ -1,0 +1,14 @@
+1ATransmitter (1A) Record - Required
+2AParent Reporting Business Headquarters 
+2BTransaction Location Information (2B) Record - Required         
+2CTransaction Location Information (2C) Record - Multiple Selling and/or Paying Business Locations
+3ASuspicious Activity Report (3A) Record - Required                                                                                                                                             X                                                                               
+4ASubject Information (4A) Record - Required
+5AMoney Orders Information (5A) Record - Required
+5BTraveler’s Checks Information (5B) Record - Required
+6AMoney Transfers Information (6A) Record – Required
+6BCurrency Exchange Information (6B) Record – Required
+7AExplanation/Description (7A) Record - Required
+9ATransaction Summary (9A) Record - Required
+9BParent Money Services Business Summary (9B) Record - Required
+9ZFile Summary (9Z) Record - Required

@@ -14,51 +14,52 @@ function Show-BTRRecord ($currentRecord, $startPos, $endPos, $displayName) {
     Write-Host "$DisplayName : [" -Foregroundcolor White -NoNewline; write-Host "$columnValue" -ForegroundColor Cyan -NoNewLine; write-Host "]" -ForegroundColor White 
 }
 
-function Get-RecordDefinition($recordType) {
-    if ($recordType -eq "3A") {
-        $recordDef = 
-            {0,2,"Record Type"},
-            {2,5,"Transaction sequence Number"},
-            {7,1,"Type of Filing"},
-            {8,14,"Document Control Number or BSA Identifier"},
-            {22,8,"Date of Transaction"},
-            {30,5,"Transaction Type"},
-            {35,15,"Total Cash-in (Item 25)"},
-            {50,15,"Cash-in: Deposit(s) (Item 25a)"},
-            {65,15,"Cash-in: Payment(s)(Item 25b)"},
-            {250,15,"Total Cash-out"}
-        return $recordDef
+function Get-BTRRecordDefinition($recordType, $fileType) {
+    if ($fileType -eq "BTR") {
+        if ($recordType -eq "3A") {
+            $recordDef = 
+                {0,2,"Record Type"},
+                {2,5,"Transaction sequence Number"},
+                {7,1,"Type of Filing"},
+                {8,14,"Document Control Number or BSA Identifier"},
+                {22,8,"Date of Transaction"},
+                {30,5,"Transaction Type"},
+                {35,15,"Total Cash-in (Item 25)"},
+                {50,15,"Cash-in: Deposit(s) (Item 25a)"},
+                {65,15,"Cash-in: Payment(s)(Item 25b)"},
+                {250,15,"Total Cash-out"}
+            return $recordDef
 
-    }
-    if ($recordType -eq "4B") {
-        $recordDef = 
-            {0,2,"Record Type"},
-            {2,5,"Transaction sequence Number"},
-            {7,40,"Item 21a"},
-            {47,993,"Filler"},
-            {1040,10,"User Field"}
-        return $recordDef
+        }
+        if ($recordType -eq "4B") {
+            $recordDef = 
+                {0,2,"Record Type"},
+                {2,5,"Transaction sequence Number"},
+                {7,40,"Item 21a"},
+                {47,993,"Filler"},
+                {1040,10,"User Field"}
+            return $recordDef
 
-    }
-    if ($recordType -eq "4C") {
-        $recordDef = 
-            {0,2,"Record Type"},
-            {2,5,"Transaction sequence Number"},
-            {7,40,"Item 22a"},
-            {47,993,"Filler"},
-            {1040,10,"User Field"}
+        }
+        if ($recordType -eq "4C") {
+            $recordDef = 
+                {0,2,"Record Type"},
+                {2,5,"Transaction sequence Number"},
+                {7,40,"Item 22a"},
+                {47,993,"Filler"},
+                {1040,10,"User Field"}
 
-        return $recordDef
+            return $recordDef
+        }
+        Write-Host "Details for Record type [$recordType] not currently available" -ForegroundColor Yellow
     }
-    Write-Host "Details for Record type [$recordType] not currently available" -ForegroundColor Yellow
 }
 
-function Process-BTRRecord ($currentRecord) {
+function Process-BTRRecord ($currentRecord, $fileType) {
 
     $recordType = Get-RecordType $currentRecord
     Write-Host "$separatorLine"
-
-    Get-RecordDefinition($recordType) | % {
+    Get-BTRRecordDefinition $recordType $fileType | % {
         $columnDefinition = $_ -split ","
 
         $offset = $columnDefinition[0]
@@ -84,7 +85,12 @@ function Show-BTRFileContent ($fileType, $filePath) {
     Clear-Host
     Write-Host "$separatorLine"
     if ($fileType -eq "BTR") {
-        Get-BTRModel $filePath | foreach { Process-BTRRecord $_ }
+        Get-BTRModel $filePath | foreach { Process-BTRRecord $_ $fileType }
+        Write-Host "$separatorLine"
+        return
+    }
+    if ($fileType -eq "RAS") {
+        Get-BTRModel $filePath | foreach { Process-RASRecord $_ $fileType}
         Write-Host "$separatorLine"
         return
     }

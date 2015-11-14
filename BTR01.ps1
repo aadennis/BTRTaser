@@ -9,12 +9,12 @@ show-BTRFi1eContent -filepath "C:\sandbox\GitRepos\BTRTaser\TestData\BTR001.TXT"
 # constants: 
 $separatorLine = "---------------------------------------------------------------------------------------"
 
-function Show-BTRRecord ($currentRecord, $startPos, $endPos, $displayName) {
+function Show-ComplianceRecord ($currentRecord, $startPos, $endPos, $displayName) {
     $columnValue = $currentRecord.substring($startpos, $endpos) 
     Write-Host "$DisplayName : [" -Foregroundcolor White -NoNewline; write-Host "$columnValue" -ForegroundColor Cyan -NoNewLine; write-Host "]" -ForegroundColor White 
 }
 
-function Get-BTRRecordDefinition($recordType, $fileType) {
+function Get-ComplianceRecordDefinition($recordType, $fileType) {
     if ($fileType -eq "BTR") {
         if ($recordType -eq "3A") {
             $recordDef = 
@@ -52,26 +52,27 @@ function Get-BTRRecordDefinition($recordType, $fileType) {
             return $recordDef
         }
         Write-Host "Details for Record type [$recordType] not currently available" -ForegroundColor Yellow
+        if ($fileType -eq "RAS") {}
     }
+
 }
 
-function Process-BTRRecord ($currentRecord, $fileType) {
+function Process-ComplianceRecord ($currentRecord, $fileType) {
 
     $recordType = Get-RecordType $currentRecord
     Write-Host "$separatorLine"
-    Get-BTRRecordDefinition $recordType $fileType | % {
+    Get-ComplianceRecordDefinition $recordType $fileType | % {
         $columnDefinition = $_ -split ","
 
         $offset = $columnDefinition[0]
         $columnLength = $columnDefinition[1] 
         $columnName = $columnDefinition[2] -replace "`"" 
 
-        show-BTRRecord $currentRecord $offset $columnLength $columnName
+        show-ComplianceRecord $currentRecord $offset $columnLength $columnName
     }
 }
 
-function Get-BTRModel ($filePath) {
-    Write-Host "BTR: Details of record types [3A], [4B], [4C]"
+function Get-ComplianceModel ($filePath) {
     Write-Host "Found in file [$filePath]"
     return Get-Content $filePath
 }
@@ -81,21 +82,17 @@ function Get-RecordType ($currentRecord) {
 }
 
 # Entry point:
-function Show-BTRFileContent ($fileType, $filePath) {
+function Show-ComplianceFileContent ($fileType, $filePath) {
     Clear-Host
     Write-Host "$separatorLine"
-    if ($fileType -eq "BTR") {
-        Get-BTRModel $filePath | foreach { Process-BTRRecord $_ $fileType }
-        Write-Host "$separatorLine"
-        return
+    $validFileTypes = "BTR","SAR"
+    if ($validFileTypes -notcontains $fileType ) {
+       Write-Host "File type [$fileType] not recognised. Exiting..."
+       return
     }
-    if ($fileType -eq "RAS") {
-        Get-BTRModel $filePath | foreach { Process-RASRecord $_ $fileType}
-        Write-Host "$separatorLine"
-        return
-    }
-    Write-Host "File type [$fileType] not recognised. Exiting..."
+    Get-ComplianceModel $filePath | foreach { Process-ComplianceRecord $_ $fileType }
+    Write-Host "$separatorLine"
     return
 }
 
-Show-BTRFileContent -fileType "BTR" -filePath "C:\sandbox\GitRepos\BTRTaser\TestData\BTR001.TXT" 
+Show-ComplianceFileContent -fileType "BTR" -filePath "C:\sandbox\GitRepos\BTRTaser\TestData\BTR001.TXT" 

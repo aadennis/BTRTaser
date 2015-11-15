@@ -117,6 +117,6 @@ function Get-ComplianceRecordSize ($recordType, $fileType) {
     $lastColumnParts = $lastColumn -split ","
     $offSet = $lastColumnParts[0]
     $columnLength = $lastColumnParts[1]
-    $recordSize = [int] $offSet + $columnLength
+    $recordSize = [int] $offSet + $columnLength - 1
     return $recordSize 
 }

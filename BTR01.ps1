@@ -38,7 +38,20 @@ function Process-ComplianceRecord ($currentRecord, $fileType) {
         $columnLength = $columnDefinition[1] 
         $columnName = $columnDefinition[2] -replace "`"" 
 
-        show-ComplianceRecord $currentRecord $offset $columnLength $columnName
+        Confirm-RecordSize $currentRecord $fileType
+        Show-ComplianceRecord $currentRecord $offset $columnLength $columnName
+    }
+}
+
+function Confirm-RecordSize ($currentRecord, $fileType) {
+
+    $recordType = Get-RecordType $currentRecord
+    $expectedRecordSize = Get-ComplianceRecordSize $recordType $fileType 
+    $currentRecordSize = $currentRecord.length
+    if ($currentRecordSize -ne $expectedRecordSize) {
+        Write-Host "Confirming [$fileType] [$recordType]"
+        Write-Host "Size should be [$expectedRecordSize ] but is [$currentRecordSize]"
+        break
     }
 }
 

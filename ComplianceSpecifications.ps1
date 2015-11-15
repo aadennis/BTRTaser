@@ -1,4 +1,8 @@
-﻿<#
+﻿$RAS = "RAS"
+$BTR = "BTR"
+
+
+<#
 .Synopsis 
   Fincen Compliance specification metadata rules 
 .Description 
@@ -7,8 +11,7 @@
 #>
 function Get-ComplianceRecordDefinition($recordType, $fileType) {
 
-    $RAS = "RAS"
-    $BTR = "BTR"
+   
 
     if ($fileType -eq $BTR) {
         if ($recordType -eq "3A") {
@@ -107,5 +110,13 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
         }
         Write-Host "Details for Record type [$recordType] not currently available" -ForegroundColor Yellow
     }
+}
 
+function Get-ComplianceRecordSize ($recordType, $fileType) {
+    $lastColumn = (Get-ComplianceRecordDefinition $recordType $fileType)[-1]
+    $lastColumnParts = $lastColumn -split ","
+    $offSet = $lastColumnParts[0]
+    $columnLength = $lastColumnParts[1]
+    $recordSize = [int] $offSet + $columnLength
+    return $recordSize 
 }

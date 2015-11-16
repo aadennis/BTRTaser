@@ -52,22 +52,23 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
       if ($fileType -eq $RAS) {
         if ($recordType -eq "1A") {
             $recordDef = 
-                {1,2,"Record Type"},
-                {3,55,"Transmitter Name"},
-                {58,50,"Transmitter Address"},
-                {108,25,"Transmitter City"},
-                {133,2,"Transmitter State"},
-                {135,9,"Transmitter ZIP Code"},
-                {144,10,"Transmitter Telephone Number"},
-                {154,55,"Transmitter Contact Name "},
-                {66,15,"Transmitter Contact Name"},
-                {209,9,"Transmitter EIN"},
-                {218,8,"Coverage Beginning Date"},
-                {226,8,"Coverage Ending Date"},
-                {234,8,"Transmitter Control Code"},
-                {242,4,"New Format Indicator"},
-                {246,225,"Filler"},
-                {471,10,"User Field"}
+                {1,2,"Record Type "},
+                {3,150,"Transmitter Name "},
+                {153,100,"Transmitter Address "},
+                {253,50,"Transmitter City "},
+                {303,3,"Transmitter State "},
+                {306,9,"Transmitter ZIP/Postal Code "},
+                {315,2,"Transmitter Country "},
+                {317,16,"Transmitter Telephone Number "},
+                {333,150,"Transmitter Contact Name "},
+                {483,25,"Transmitter Taxpayer Identification Number (TIN) "},
+                {508,8,"Coverage Beginning Date "},
+                {516,8,"Coverage Ending Date "},
+                {524,8,"Transmitter Control Code (TCC) "},
+                {532,3,"Batch Sequence Number (BSN) "},
+                {535,652,"Filler "},
+                {1187,4,"Format Indicator "},
+                {1191,10,"User Field "}
             return $recordDef
         }
         if ($recordType -eq "2A") {

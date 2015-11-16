@@ -50,7 +50,7 @@ function Confirm-RecordSize ($currentRecord, $fileType) {
     $currentRecordSize = $currentRecord.length
     if ($currentRecordSize -ne $expectedRecordSize) {
         Write-Host "Confirming [$fileType] [$recordType]"
-        Write-Host "Size should be [$expectedRecordSize ] but is [$currentRecordSize]"
+        Write-Host "Record size should be [$expectedRecordSize] but is [$currentRecordSize]"
         break
     }
 }

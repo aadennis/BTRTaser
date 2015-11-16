@@ -109,6 +109,57 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
                 {471,10,"User Field"}
             return $recordDef
         }
+        if ($recordType -eq "3A") {
+            $recordDef = 
+                {1,2,"Record Type "},
+                {3,5,"Transaction Sequence Number "},
+                {8,1,"Attachment Indicator "},
+                {9,1,"Type of Filing (Item 1) "},
+                {10,1,"Continuing Activity Report (Item 1) "},
+                {11,1,"Joint Report (Item 1) "},
+                {12,14,"Prior Report Document Control Number/ BSA Identifier (Item 1) "},
+                {26,15,"Amount Involved In This Report (Item 26) "},
+                {41,1,"Amount Unknown or No Amount Involved (Item 26) "},
+                {42,8,"Date or Date Range of Suspicious Activity - From (Item 27) "},
+                {50,8,"Date or Date Range of Suspicious Activity - To (Item 27) "},
+                {58,15,"Cumulative Amount (Item 28) "},
+                {73,7,"Structuring (Item 29) "},
+                {80,50,"Structuring - Other Description (Item 29) "},
+                {130,2,"Terrorist Financing (Item 30) "},
+                {132,50,"Terrorist Financing - Other Description (Item 30) "},
+                {182,11,"Fraud (Item 31) "},
+                {193,50,"Fraud - Other Description (Item 31) "},
+                {243,5,"Casinos (Item 32) "},
+                {248,50,"Casinos - Other Description (Item 32) "},
+                {298,13,"Money Laundering (Item 33) "},
+                {311,50,"Money Laundering - Other Description (Item 33) "},
+                {361,6,"Identification / Documentation (Item 34) "},
+                {367,50,"Identification / Documentation - Other Description (Item 34) "},
+                {417,19,"Other Suspicious Activities (Item 35) "},
+                {436,50,"Other Suspicious Activities - Other Description (Item 35) "},
+                {486,7,"Insurance (Item 36) "},
+                {493,50,"Insurance - Other Description (Item 36) "},
+                {543,5,"Securities/Futures/Options (Item 37) "},
+                {548,50,"Securities/Futures/Options - Other Description (Item 37) "},
+                {598,5,"Mortgage Fraud (Item 38) "},
+                {603,50,"Mortgage Fraud - Other Description (Item 38) "},
+                {653,20,"Product Type(s) Involved (Item 39) "},
+                {673,50,"Product Type(s) Involved- Other Description (Item 39) "},
+                {723,10,"Instrument Type(s)/Payment Mechanism(s) Involved (Item 40) "},
+                {733,50,"Instrument Type(s)/Payment Mechanism(s) Involved - Other Description (Item 40) "},
+                {783,150,"LE Contact Agency (Item 92) "},
+                {933,150,"LE Contact Name (Item 93) "},
+                {1083,16,"LE Contact Telephone Number (Item 94) "},
+                {1099,6,"LE Contact Telephone Extension (Item 94) "},
+                {1105,8,"LE Contact Date (Item 95) "},
+                {1113,10,"Filing Institution Contact Office (Item 96) "},
+                {1123,16,"Filing Institution Phone Number (Item 97) "},
+                {1139,6,"Filing Institution Phone Number Extension (Item 97) "},
+                {1145,8,"Date Filed (Item 98) "},
+                {1153,20,"Internal Control/ File Number (Item 91) "},
+                {1173,18,"Filler "}
+                return $recordDef
+        }
         Write-Host "Details for Record type [$recordType] not currently available" -ForegroundColor Yellow
     }
 }

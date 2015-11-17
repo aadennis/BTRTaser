@@ -160,6 +160,44 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
                 {1173,18,"Filler "}
                 return $recordDef
         }
+        if ($recordType -eq "9A") {
+            $recordDef = 
+                {1,2,"Record Type "},
+                {3,7,"Suspicious Activity Count (3A) "},
+                {10,7,"Subject Count (4A) "},
+                {17,7,"Narrative Description (5A) Count "},
+                {24,7,"Branch Office Information (2C) Count "},
+                {31,1160,"Filler "},
+                {1191,10,"User Field "}
+                return $recordDef
+        }
+        if ($recordType -eq "9B") {
+            $recordDef = 
+                {1,2,"Record Type "},
+                {3,7,"Financial Institution Where Activity Occurred Count (2B) "},
+                {10,7,"Suspicious Activity Count (3A) "},
+                {17,7,"Subject Count (4A) "},
+                {24,7,"Narrative Description (5A) Count "},
+                {31,7,"Branch Office Information (2C) Count "},
+                {38,1153,"Filler "},
+                {1191,10,"User Field "}
+                return $recordDef
+        }
+        if ($recordType -eq "9Z") {
+            $recordDef = 
+                {1,2,"Record Type "},
+                {3,7,"Filing Institution Contact Information Count (2A) "},
+                {10,7,"Financial Institution Where Activity Occurred Count (2B) "},
+                {17,7,"Suspicious Activity Count (3A) "},
+                {24,7,"Subject Count (4A) "},
+                {31,7,"Narrative Description (5A) Count "},
+                {38,7,"Branch Office Information (2C) Count "},
+                {45,7,"Attachment Count "},
+                {52,1139,"Filler "},
+                {1191,10,"User Field "}              
+                return $recordDef
+        }
+
         Write-Host "Details for Record type [$recordType] not currently available" -ForegroundColor Yellow
     }
 }

@@ -158,8 +158,43 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
                 {1145,8,"Date Filed (Item 98) "},
                 {1153,20,"Internal Control/ File Number (Item 91) "},
                 {1173,18,"Filler "}
-                return $recordDef
+             return $recordDef
         }
+        if ($recordType -eq "4H") {
+            $recordDef = 
+                {1,2,"Record Type "},
+                {3,5,"Transaction Sequence Number "},
+                {8,25,"Institution TIN (Item 21) "},
+                {33,12,"Relationship of the Subject to an Institution (Item 21) "},
+                {45,50,"Relationship of the Subject to an Institution - Other Description (Item 21) "},
+                {95,1,"Status of Subject Relationship to Institution (Item 22) "},
+                {96,8,"Action Date (Item 23) "},
+                {104,1087,"Filler "},
+                {1191,10,"User Field "}
+            return $recordDef
+        }
+        if ($recordType -eq "4I") {
+            $recordDef = 
+                {1,2,"Record Type "},
+                {3,5,"Transaction Sequence Number "},
+                {8,1,"Non-US Financial Institution (Item 24) "},
+                {9,25,"Financial Institution TIN and Account Number Related to Subject (Item 24) "},
+                {34,40,"Financial Institution TIN and Account Number Related to Subject (Item 24) "},
+                {74,1,"Account Closed - Yes (Item 24) "},
+                {75,1116,"Filler "},
+                {1191,10,"User Field "}
+            return $recordDef
+        }
+        if ($recordType -eq "5A") {
+            $recordDef = 
+                {1,2,"Record Type "},
+                {3,5,"Transaction Sequence Number "},
+                {8,850,"Suspicious Activity Information - Narrative "},
+                {858,333,"Filler "},
+                {1191,10,"User Field "}
+            return $recordDef
+        }
+
         if ($recordType -eq "9A") {
             $recordDef = 
                 {1,2,"Record Type "},
@@ -169,7 +204,7 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
                 {24,7,"Branch Office Information (2C) Count "},
                 {31,1160,"Filler "},
                 {1191,10,"User Field "}
-                return $recordDef
+            return $recordDef
         }
         if ($recordType -eq "9B") {
             $recordDef = 

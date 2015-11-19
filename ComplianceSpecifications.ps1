@@ -109,6 +109,22 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
                 {471,10,"User Field"}
             return $recordDef
         }
+        if ($recordType -eq "2C") {
+            $recordDef = 
+                {1,2,"Record Type "},
+                {3,10,"Branch or Office Location Code "},
+                {13,1,"Part III Branch's Role in Transaction (Item 64) "},
+                {14,100,"Part III Address of Branch or Office (Item 65) "},
+                {114,50,"Part III Branch or Office City (Item 67) "},
+                {164,3,"Part III Branch or Office State (Item 68) "},
+                {167,9,"Part III Branch or Office ZIP/Postal Code (Item 69) "},
+                {176,2,"Part III Branch or Office Country (Item 70) "},
+                {178,20,"Part III Branch or Office RSSD Number (Item 66) "},
+                {198,993,"Filler "},
+                {1191,10,"User Field "}
+            return $recordDef
+        }
+
         if ($recordType -eq "3A") {
             $recordDef = 
                 {1,2,"Record Type "},
@@ -159,6 +175,24 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
                 {1153,20,"Internal Control/ File Number (Item 91) "},
                 {1173,18,"Filler "}
              return $recordDef
+        }
+        if ($recordType -eq "3B") {
+            $recordDef = 
+                {1,2,"Record Type "},
+                {3,5,"Transaction Sequence Number "},
+                {8,50,"Commodity Type (Item 41) "},
+                {58,1133,"Filler "},
+                {1191,10,"User Field "}
+            return $recordDef
+        }
+        if ($recordType -eq "3C") {
+            $recordDef = 
+                {1,2,"Record Type "},
+                {3,5,"Transaction Sequence Number "},
+                {8,50,"Commodity Type (Item 42) "},
+                {58,1133,"Filler "},
+                {1191,10,"User Field "}
+            return $recordDef
         }
         if ($recordType -eq "4H") {
             $recordDef = 

@@ -194,6 +194,15 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
                 {1191,10,"User Field "}
             return $recordDef
         }
+        if ($recordType -eq "3D") {
+            $recordDef = 
+                {1,2,"Record Type "},
+                {3,5,"Transaction Sequence Number "},
+                {8,5,"Market Where Traded (Item 43) "},
+                {13,1178,"Filler "},
+                {1191,10,"User Field "}
+            return $recordDef
+        }
         if ($recordType -eq "4H") {
             $recordDef = 
                 {1,2,"Record Type "},

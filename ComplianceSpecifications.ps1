@@ -203,6 +203,35 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
                 {1191,10,"User Field "}
             return $recordDef
         }
+        if ($recordType -eq "4A") {
+            $recordDef = 
+                {1,2,"Record Type "},
+                {3,5,"Transaction Sequence Number "},
+                {8,1,"If Entity (Item 2a) "},
+                {9,1,"If All Critical* Subject Information Is Unavailable (Item 2b) "},
+                {10,150,"Individual's Last Name or Entity's Legal Name (Item 3) "},
+                {160,1,"Individual's Last Name or Entity's Legal Name Unknown (Item 3) "},
+                {161,35,"First Name (Item 4) "},
+                {196,1,"First Name Unknown (Item 4) "},
+                {197,35,"Middle Name or Middle Initial (Item 5) "},
+                {232,35,"Suffix (Item 5) "},
+                {267,1,"Gender (Item 5a) "},
+                {268,30,"Occupation or Type of Business (Item 7) "},
+                {298,6,"NAICS Code (Item 7) "},
+                {304,25,"TIN (Item 13) "},
+                {329,1,"TIN Unknown (Item 13) "},
+                {330,1,"TIN Type (Item 14) "},
+                {331,1,"Form of Identification for Subject Unknown (Item 15) "},
+                {332,8,"Date of Birth (Item 16) "},
+                {340,1,"Date of Birth Unknown (Item 16) "},
+                {341,1,"Corroborative Statement to Filer? (Item 20) "},
+                {342,1,"No Known Account Involved (Item 24) "},
+                {343,1,"Subject Role in Suspicious Activity (Item 25) "},
+                {344,847,"Filler "},
+                {1191,10,"User Field "}
+             return $recordDef
+        }
+
         if ($recordType -eq "4H") {
             $recordDef = 
                 {1,2,"Record Type "},

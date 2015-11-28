@@ -8,6 +8,8 @@ $BTR = "BTR"
 .Description 
 . Example 
   Get-ComplianceRecordDefinition $recordType $fileType
+
+
 #>
 function Get-ComplianceRecordDefinition($recordType, $fileType) {
 
@@ -200,6 +202,24 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
                 {3,5,"Transaction Sequence Number "},
                 {8,5,"Market Where Traded (Item 43) "},
                 {13,1178,"Filler "},
+                {1191,10,"User Field "}
+            return $recordDef
+        } 
+        if ($recordType -eq "3E") {
+            $recordDef = 
+                {1,2,"Record Type "},
+                {3,5,"Transaction Sequence Number "},
+                {8,39,"IP Address (Item 44) "},
+                {47,1144,"Filler "},
+                {1191,10,"User Field "}
+            return $recordDef
+        }
+        if ($recordType -eq "3F") {
+            $recordDef = 
+                {1,2,"Record Type "},
+                {3,5,"Transaction Sequence Number "},
+                {8,12,"CUSIP Number (Item 45) "},
+                {20,1171,"Filler "},
                 {1191,10,"User Field "}
             return $recordDef
         }

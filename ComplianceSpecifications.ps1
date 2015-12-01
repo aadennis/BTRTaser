@@ -52,8 +52,9 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
 
     }
       if ($fileType -eq $RAS) {
-        if ($recordType -eq "1A") {
-            $recordDef = 
+        switch($recordType) {
+            "1A" {
+                $recordDef = 
                 {1,2,"Record Type "},
                 {3,150,"Transmitter Name "},
                 {153,100,"Transmitter Address "},
@@ -71,10 +72,10 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
                 {535,652,"Filler "},
                 {1187,4,"Format Indicator "},
                 {1191,10,"User Field "}
-            return $recordDef
-        }
-        if ($recordType -eq "2A") {
-            $recordDef = 
+                return $recordDef
+            }
+            "2A" {
+                $recordDef = 
                 {1,2,"Record Type"},
                 {3,1,"Reporting Business same..."},
                 {4,55,"Reporting Business Name"},
@@ -89,10 +90,10 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
                 {221,22,"Internal File/Report Number (Item 44)"},
                 {243,228,"Filler"},
                 {471,10,"User Field"}
-            return $recordDef
-        }
-        if ($recordType -eq "2B") {
-            $recordDef = 
+                return $recordDef
+            }
+            "2B" {
+                $recordDef = 
                 {1,2,"Record Type"},
                 {3,7,"Transaction Location Code"},
                 {8,1,"Multiple Transaction Locations (Item 22)"},
@@ -109,10 +110,10 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
                 {227,22,"Internal File/Report Number"},
                 {249,222,"Filler"},
                 {471,10,"User Field"}
-            return $recordDef
-        }
-        if ($recordType -eq "2C") {
-            $recordDef = 
+                return $recordDef
+            }
+            "2C" {
+                $recordDef = 
                 {1,2,"Record Type "},
                 {3,10,"Branch or Office Location Code "},
                 {13,1,"Part III Branch's Role in Transaction (Item 64) "},
@@ -124,10 +125,9 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
                 {178,20,"Part III Branch or Office RSSD Number (Item 66) "},
                 {198,993,"Filler "},
                 {1191,10,"User Field "}
-            return $recordDef
-        }
-
-        if ($recordType -eq "3A") {
+                return $recordDef
+            }
+            "3A" {
             $recordDef = 
                 {1,2,"Record Type "},
                 {3,5,"Transaction Sequence Number "},
@@ -178,7 +178,7 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
                 {1173,18,"Filler "}
              return $recordDef
         }
-        if ($recordType -eq "3B") {
+        "3B" {
             $recordDef = 
                 {1,2,"Record Type "},
                 {3,5,"Transaction Sequence Number "},
@@ -187,7 +187,7 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
                 {1191,10,"User Field "}
             return $recordDef
         }
-        if ($recordType -eq "3C") {
+        "3C" {
             $recordDef = 
                 {1,2,"Record Type "},
                 {3,5,"Transaction Sequence Number "},
@@ -196,7 +196,7 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
                 {1191,10,"User Field "}
             return $recordDef
         }
-        if ($recordType -eq "3D") {
+        "3D" {
             $recordDef = 
                 {1,2,"Record Type "},
                 {3,5,"Transaction Sequence Number "},
@@ -205,7 +205,7 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
                 {1191,10,"User Field "}
             return $recordDef
         } 
-        if ($recordType -eq "3E") {
+        "3E" {
             $recordDef = 
                 {1,2,"Record Type "},
                 {3,5,"Transaction Sequence Number "},
@@ -214,7 +214,7 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
                 {1191,10,"User Field "}
             return $recordDef
         }
-        if ($recordType -eq "3F") {
+        "3F" {
             $recordDef = 
                 {1,2,"Record Type "},
                 {3,5,"Transaction Sequence Number "},
@@ -223,7 +223,7 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
                 {1191,10,"User Field "}
             return $recordDef
         }
-        if ($recordType -eq "4A") {
+        "4A" {
             $recordDef = 
                 {1,2,"Record Type "},
                 {3,5,"Transaction Sequence Number "},
@@ -251,7 +251,7 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
                 {1191,10,"User Field "}
              return $recordDef
         }
-        if ($recordType -eq "4B") {
+        "4B" {
             $recordDef = 
                 {1,2,"Record Type "},
                 {3,5,"Transaction Sequence Number "},
@@ -269,7 +269,7 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
                 {1191,10,"User Field "}
             return $recordDef
         }
-        if ($recordType -eq "4C") {
+        "4C" {
             $recordDef = 
                 {1,2,"Record Type "},
                 {3,5,"Transaction Sequence Number "},
@@ -282,7 +282,7 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
                 {1191,10,"User Field "}
            return $recordDef
         }
-        if ($recordType -eq "4D") {
+        "4D" {
             $recordDef = 
                 {1,2,"Record Type "},
                 {3,5,"Transaction Sequence Number "},
@@ -292,7 +292,7 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
 
            return $recordDef
         }
-        if ($recordType -eq "4E") {
+        "4E" {
             $recordDef = 
                 {1,2,"Record Type "},
                 {3,5,"Transaction Sequence Number "},
@@ -303,7 +303,7 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
                 {1191,10,"User Field "}
            return $recordDef
         }
-        if ($recordType -eq "4F") {
+        "4F" {
             $recordDef = 
                 {1,2,"Record Type "},
                 {3,5,"Transaction Sequence Number "},
@@ -312,7 +312,7 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
                 {1191,10,"User Field "}
            return $recordDef
         }
-        if ($recordType -eq "4G") {
+        "4G" {
             $recordDef = 
                 {1,2,"Record Type "},
                 {3,5,"Transaction Sequence Number "},
@@ -321,7 +321,7 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
                 {1191,10,"User Field "}
            return $recordDef
         }
-        if ($recordType -eq "4H") {
+        "4H" {
             $recordDef = 
                 {1,2,"Record Type "},
                 {3,5,"Transaction Sequence Number "},
@@ -334,7 +334,7 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
                 {1191,10,"User Field "}
             return $recordDef
         }
-        if ($recordType -eq "4I") {
+        "4I" {
             $recordDef = 
                 {1,2,"Record Type "},
                 {3,5,"Transaction Sequence Number "},
@@ -346,7 +346,7 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
                 {1191,10,"User Field "}
             return $recordDef
         }
-        if ($recordType -eq "5A") {
+        "5A" {
             $recordDef = 
                 {1,2,"Record Type "},
                 {3,5,"Transaction Sequence Number "},
@@ -356,7 +356,7 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
             return $recordDef
         }
 
-        if ($recordType -eq "9A") {
+        "9A" {
             $recordDef = 
                 {1,2,"Record Type "},
                 {3,7,"Suspicious Activity Count (3A) "},
@@ -367,7 +367,7 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
                 {1191,10,"User Field "}
             return $recordDef
         }
-        if ($recordType -eq "9B") {
+        "9B" {
             $recordDef = 
                 {1,2,"Record Type "},
                 {3,7,"Financial Institution Where Activity Occurred Count (2B) "},
@@ -379,7 +379,7 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
                 {1191,10,"User Field "}
                 return $recordDef
         }
-        if ($recordType -eq "9Z") {
+        "9Z" {
             $recordDef = 
                 {1,2,"Record Type "},
                 {3,7,"Filing Institution Contact Information Count (2A) "},
@@ -393,9 +393,11 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
                 {1191,10,"User Field "}              
                 return $recordDef
         }
-
-        Write-Host "Details for Record type [$recordType] not currently available" -ForegroundColor Yellow
+        default {
+            Write-Host "Details for Record type [$recordType] not currently available" -ForegroundColor Yellow
+        }
     }
+  }
 }
 
 function Get-ComplianceRecordSize ($recordType, $fileType) {

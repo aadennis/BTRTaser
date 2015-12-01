@@ -251,7 +251,76 @@ function Get-ComplianceRecordDefinition($recordType, $fileType) {
                 {1191,10,"User Field "}
              return $recordDef
         }
+        if ($recordType -eq "4B") {
+            $recordDef = 
+                {1,2,"Record Type "},
+                {3,5,"Transaction Sequence Number "},
+                {8,100,"Part I Address (Item 8) "},
+                {108,1,"Part I Address Unknown (Item 8) "},
+                {109,50,"Part I City (Item 9) "},
+                {159,1,"Part I City Unknown (Item 9) "},
+                {160,3,"Part I State (Item 10) "},
+                {163,1,"Part I State Unknown (Item 10) "},
+                {164,9,"Part I ZIP/Postal Code (Item 11) "},
+                {173,1,"Part I ZIP/Postal Code Unknown (Item 11) "},
+                {174,2,"Part I Country (Item 12) "},
+                {176,1,"Part I Country Unknown (Item 12) "},
+                {177,1014,"Filler "},
+                {1191,10,"User Field "}
+            return $recordDef
+        }
+        if ($recordType -eq "4C") {
+            $recordDef = 
+                {1,2,"Record Type "},
+                {3,5,"Transaction Sequence Number "},
+                {8,1,"Form of Identification - Type (Item 15) "},
+                {9,24,"Form of Identification - Number (Item 15) "},
+                {33,3,"Subject Identification Issuing State (Item 15) "},
+                {36,2,"Subject Identification Issuing Country (Item 15) "},
+                {38,50,"Subject Identification - Other (Item 15) "},
+                {88,1103,"Filler "},
+                {1191,10,"User Field "}
+           return $recordDef
+        }
+        if ($recordType -eq "4D") {
+            $recordDef = 
+                {1,2,"Record Type "},
+                {3,5,"Transaction Sequence Number "},
+                {8,150,"Part I Alternate Name (Item 6) "},
+                {158,1033,"Filler "},
+                {1191,10,"User Field "}
 
+           return $recordDef
+        }
+        if ($recordType -eq "4E") {
+            $recordDef = 
+                {1,2,"Record Type "},
+                {3,5,"Transaction Sequence Number "},
+                {8,1,"Part I Phone Number - Type (Item 17) "},
+                {9,16,"Part I Phone Number (Item 18) "},
+                {25,6,"Part I Phone Number Extension (Item 18) "},
+                {31,1160,"Filler "},
+                {1191,10,"User Field "}
+           return $recordDef
+        }
+        if ($recordType -eq "4F") {
+            $recordDef = 
+                {1,2,"Record Type "},
+                {3,5,"Transaction Sequence Number "},
+                {8,50,"E-mail Address (Item 19) "},
+                {58,1133,"Filler "},
+                {1191,10,"User Field "}
+           return $recordDef
+        }
+        if ($recordType -eq "4G") {
+            $recordDef = 
+                {1,2,"Record Type "},
+                {3,5,"Transaction Sequence Number "},
+                {8,517,"Website (URL) Address (Item 19) "},
+                {525,666,"Filler "},
+                {1191,10,"User Field "}
+           return $recordDef
+        }
         if ($recordType -eq "4H") {
             $recordDef = 
                 {1,2,"Record Type "},
